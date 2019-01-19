@@ -1,0 +1,49 @@
+.addWrapper {
+    background-color: #fff;
+    height: 550px;
+    margin-top: 50px;
+    padding-top: 5px;
+    margin-bottom: 600px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    max-width: 100px;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+    margin: 30px;
+    
+    padding: 0px 70px 70px 70px;
+    border: 1px solid black;
+}
+
+p {
+    width: 50%;
+    
+}
+
+
+
+input {
+    width: 80%;
+}
+
+.comment {
+    width: 100%;
+}
+.comment input {
+    width: 90%;
+}
+
+.addbutton {
+    margin-top: 30px;
+    width: 100%;
+}

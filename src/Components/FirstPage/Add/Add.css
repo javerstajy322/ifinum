@@ -1,0 +1,14 @@
+.Add {
+    background-color: #fff;
+    height: 100px;
+    margin-top: 50px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    max-width: 100px;
+}
