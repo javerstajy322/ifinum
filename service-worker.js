@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/javerstajy322/ifinum/precache-manifest.ee21beee1bf2bf3224a4dd77012df540.js"
+  "/ifinum/precache-manifest.60382628757593a11a0e3fa0cb66eda7.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/javerstajy322/ifinum/index.html", {
+workbox.routing.registerNavigationRoute("/ifinum/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
