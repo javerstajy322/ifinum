@@ -9,8 +9,13 @@ class firsPage extends React.Component {
   state = {
     db: []
   };
-  componentWillMount = () => {
-    fetch("http://localhost:3000/invoices")
+
+  componentDidMount = async () => {
+    await this.fetchGET();
+  };
+
+  fetchGET = async () => {
+    await fetch("http://localhost:3000/invoices")
       .then(response => response.json())
       .then(data => {
         console.log("data", data);
@@ -18,13 +23,32 @@ class firsPage extends React.Component {
       })
       .catch(error => console.log("error", error));
   };
+
+  fetchDELETE = async id => {
+    await fetch(`http://localhost:3000/invoices/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    }).then(response => response.json());
+  };
+
+  handleClick = async event => {
+    const { db } = this.state;
+    let i = event.target.attributes.delete.nodeValue;
+
+    await this.fetchDELETE(db[i].id);
+    await this.fetchGET();
+
+    console.log("Delete:", db[i]);
+  };
+
   render() {
     return (
       <div className="main">
         <Title />
         <Add />
-        {/* переход на создание invoices */}
-        <Show db={this.state.db} />
+        <Show db={this.state.db} click={event => this.handleClick(event)} />
       </div>
     );
   }

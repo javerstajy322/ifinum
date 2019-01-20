@@ -44,17 +44,21 @@ class secondPage extends React.Component {
   };
 
   onChangeHandler = e => {
-    if (e.currentTarget.name === "number") {
-      this.setState({ number: e.target.value });
-    }
-    if (e.currentTarget.name === "start_date") {
-      this.setState({ start_date: e.target.value });
-    }
-    if (e.currentTarget.name === "end_date") {
-      this.setState({ end_date: e.target.value });
-    }
-    if (e.currentTarget.name === "comment") {
-      this.setState({ comment: e.target.value });
+    switch (e.currentTarget.name) {
+      case "number":
+        this.setState({ number: e.target.value });
+        break;
+      case "start_date":
+        this.setState({ start_date: e.target.value });
+        break;
+      case "end_date":
+        this.setState({ end_date: e.target.value });
+        break;
+      case "comment":
+        this.setState({ comment: e.target.value });
+        break;
+      default:
+        return;
     }
   };
 
@@ -70,7 +74,6 @@ class secondPage extends React.Component {
                 <input
                   type="text"
                   name="number"
-                  id=""
                   value={this.state.number}
                   onChange={e => this.onChangeHandler(e)}
                 />
@@ -80,7 +83,6 @@ class secondPage extends React.Component {
                 <input
                   type="text"
                   name="start_date"
-                  id=""
                   value={this.state.start_date}
                   onChange={e => this.onChangeHandler(e)}
                 />
@@ -90,7 +92,6 @@ class secondPage extends React.Component {
                 <input
                   type="text"
                   name="end_date"
-                  id=""
                   value={this.state.end_date}
                   onChange={e => this.onChangeHandler(e)}
                 />
@@ -100,7 +101,6 @@ class secondPage extends React.Component {
                 <input
                   type="text"
                   name="comment"
-                  id=""
                   value={this.state.comment}
                   onChange={e => this.onChangeHandler(e)}
                 />

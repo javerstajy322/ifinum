@@ -11,7 +11,7 @@ const Add = props => {
         <h3>Actions</h3>
         <Link to={Page1Text.redirect}><button>Add new</button></Link>
         <br />
-        {/* actions Add new Форма создания, переход на страницу создания. */}
+        
       </div>
     </div>
   );
