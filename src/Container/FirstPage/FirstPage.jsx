@@ -7,11 +7,12 @@ import Show from "../../Components/FirstPage/Show/Show";
 
 class firsPage extends React.Component {
   state = {
-    db: []
+    db: [],
+    loading: true
   };
 
-  componentDidMount = async () => {
-    await this.fetchGET();
+  componentDidMount = () => {
+    this.fetchGET();
   };
 
   fetchGET = async () => {
@@ -19,7 +20,7 @@ class firsPage extends React.Component {
       .then(response => response.json())
       .then(data => {
         console.log("data", data);
-        this.setState({ db: data });
+        this.setState({ db: data, loading: false });
       })
       .catch(error => console.log("error", error));
   };
@@ -44,6 +45,18 @@ class firsPage extends React.Component {
   };
 
   render() {
+    const { loading } = this.state;
+
+    if (loading) {
+      return (
+        <div className="main">
+          <Title />
+          <Add />
+          <div className="loader" />
+        </div>
+      );
+    }
+
     return (
       <div className="main">
         <Title />
