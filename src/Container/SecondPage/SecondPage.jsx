@@ -2,29 +2,23 @@ import React from "react";
 
 import "../main.css";
 
-import { Page2Text } from "../../imports/direct/index";
-import { Link } from "react-router-dom";
-
 import Title from "../../Components/SecondPage/Title/Title";
+import Add from "../../Components/SecondPage/Add/Add";
 import "../../Components/SecondPage/Add/Add.css";
 
 class secondPage extends React.Component {
   state = {
-    db: [],
-    number: "",
-    start_date: "",
-    end_date: "",
-    comment: ""
+    db: []
   };
 
-  fetchPOST = () => {
-    fetch("http://localhost:3000/invoices", {
+  fetchPOST = async props => {
+    await fetch("http://localhost:3000/invoices", {
       method: "POST",
       body: JSON.stringify({
-        date_created: this.state.start_date,
-        number: this.state.number,
-        date_supply: this.state.end_date,
-        comment: this.state.comment
+        number: props.number,
+        start_date: props.start_date,
+        end_date: props.end_date,
+        comment: props.comment
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8"
@@ -32,91 +26,17 @@ class secondPage extends React.Component {
     }).then(response => response.json());
   };
 
-  clickHandler = e => {
+  clickHandler = (e, props) => {
     e.preventDefault();
-    this.fetchPOST();
-    this.setState({
-      number: "",
-      start_date: "",
-      end_date: "",
-      comment: ""
-    });
-  };
-
-  onChangeHandler = e => {
-    switch (e.currentTarget.name) {
-      case "number":
-        this.setState({ number: e.target.value });
-        break;
-      case "start_date":
-        this.setState({ start_date: e.target.value });
-        break;
-      case "end_date":
-        this.setState({ end_date: e.target.value });
-        break;
-      case "comment":
-        this.setState({ comment: e.target.value });
-        break;
-      default:
-        return;
-    }
+    console.log(props);
+    this.fetchPOST(props);
   };
 
   render() {
     return (
       <div className="main">
         <Title />
-        <div className="Add">
-          <div className="addWrapper">
-            <form action="">
-              <p>
-                <p>Number:</p>
-                <input
-                  type="text"
-                  name="number"
-                  value={this.state.number}
-                  onChange={e => this.onChangeHandler(e)}
-                />
-              </p>
-              <p>
-                <p>Invoice Date:</p>
-                <input
-                  type="text"
-                  name="start_date"
-                  value={this.state.start_date}
-                  onChange={e => this.onChangeHandler(e)}
-                />
-              </p>
-              <p>
-                <p>Supply Date:</p>
-                <input
-                  type="text"
-                  name="end_date"
-                  value={this.state.end_date}
-                  onChange={e => this.onChangeHandler(e)}
-                />
-              </p>
-              <p className="comment">
-                <p>Comment:</p>
-                <input
-                  type="text"
-                  name="comment"
-                  value={this.state.comment}
-                  onChange={e => this.onChangeHandler(e)}
-                />
-              </p>
-              <br />
-              <div>
-                <button className="addbutton" onClick={this.clickHandler}>
-                  Отправка данных в json.
-                </button>
-                <Link to={Page2Text.redirect}>
-                  <button>Переход на главную страницу.</button>
-                </Link>
-              </div>
-            </form>
-          </div>
-        </div>
+        <Add click={this.clickHandler} />
       </div>
     );
   }

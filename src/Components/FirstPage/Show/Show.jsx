@@ -8,11 +8,16 @@ class Show extends Component {
       this.props.db.length !== 0 ? (
         this.props.db.map((item, index) => (
           <tr key={index}>
-            <th>{item.date_created}</th>
+            <th>{item.start_date}</th>
             <th>{item.number}</th>
-            <th>{item.date_supply}</th>
+            <th>{item.end_date}</th>
             <th>{item.comment}</th>
-            <button delete={index} name="delete" className="deleteButton" onClick={this.props.click}>
+            <button
+              delete={index}
+              name="delete"
+              className="deleteButton"
+              onClick={this.props.click}
+            >
               Удалить
             </button>
           </tr>
