@@ -45,14 +45,14 @@ class firsPage extends React.Component {
     console.log("Delete:", db[i]);
   };
 
-  fetchEDIT = async (number, id) => {
+  fetchEDIT = async (number, start_date, end_date, comment, id) => {
     await fetch(`http://localhost:3000/invoices/${id}`, {
       method: "PUT",
       body: JSON.stringify({
-        number: number
-        // start_date: 2,
-        // end_date: 3,
-        // comment: 4
+        number: number,
+        start_date: start_date,
+        end_date: end_date,
+        comment: comment
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8"
@@ -60,14 +60,24 @@ class firsPage extends React.Component {
     }).then(response => response.json());
   };
 
-  typeEndHandler = async (event, index, completeNumberArray) => {
+  typeEndHandler = async (
+    event,
+    index,
+    completeNumberArray,
+    completeStartDateArray,
+    completeEndDateArray,
+    completeCommentArray
+  ) => {
     const indexEquelid = index + 1;
     const number = completeNumberArray[index];
+    const start_date = completeStartDateArray[index];
+    const end_date = completeEndDateArray[index];
+    const comment = completeCommentArray[index];
     const a = document.querySelector(".edit");
 
     console.log("completeNumberArray " + completeNumberArray);
     if (event.keyCode === 13) {
-      await this.fetchEDIT(number, indexEquelid);
+      await this.fetchEDIT(number, start_date, end_date, comment, indexEquelid);
       await this.fetchGET();
       a.classList.remove("edit");
       a.className = "input-none > input";
