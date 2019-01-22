@@ -8,7 +8,8 @@ import Show from "../../Components/FirstPage/Show/Show";
 class firsPage extends React.Component {
   state = {
     db: [],
-    loading: true
+    loading: true,
+    editing: false
   };
 
   componentDidMount = () => {
@@ -44,6 +45,40 @@ class firsPage extends React.Component {
     console.log("Delete:", db[i]);
   };
 
+  fetchEDIT = async (number, id) => {
+    await fetch(`http://localhost:3000/invoices/${id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        number: number
+        // start_date: 2,
+        // end_date: 3,
+        // comment: 4
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    }).then(response => response.json());
+  };
+
+  typeEndHandler = async (event, index, completeNumberArray) => {
+    const indexEquelid = index + 1;
+    const number = completeNumberArray[index];
+    const a = document.querySelector(".edit");
+
+    console.log("completeNumberArray " + completeNumberArray);
+    if (event.keyCode === 13) {
+      await this.fetchEDIT(number, indexEquelid);
+      await this.fetchGET();
+      a.classList.remove("edit");
+      a.className = "input-none > input";
+      console.log(event.a);
+      this.setState(
+        { editing: true },
+        console.log("editing " + this.state.editing)
+      );
+    }
+  };
+
   render() {
     const { loading } = this.state;
 
@@ -61,7 +96,12 @@ class firsPage extends React.Component {
       <div className="main">
         <Title />
         <Add />
-        <Show db={this.state.db} click={event => this.handleClick(event)} />
+        <Show
+          editing={this.state.editing}
+          db={this.state.db}
+          click={event => this.handleClick(event)}
+          typeEnd={this.typeEndHandler}
+        />
       </div>
     );
   }

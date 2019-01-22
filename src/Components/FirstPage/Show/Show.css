@@ -5,7 +5,7 @@ table {
 }
 
 tr {
-    position: relative;
+  position: relative;
 }
 
 th {
@@ -21,4 +21,28 @@ th {
   display: inline-block;
   align-items: center;
   position: absolute;
+}
+
+
+
+.edit {
+  font-size: 0px;
+  background-color: red;
+}
+
+.input-none > input { 
+  display: none;
+}
+
+input.edit {
+  font-size: 14px;
+  background-color: white;
+
+}
+.defaultInput {
+  display: none;
+}
+
+.input-none > .inputStopEdit {
+  display: none;
 }
